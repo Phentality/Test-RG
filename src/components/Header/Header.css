@@ -1,0 +1,19 @@
+.header {
+    max-width: 1920px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: transparent;
+}
+
+.header__logo {
+    width: 200px;
+    height: 70px;
+    margin: 10px 0 10px 25px;
+    background-color: transparent;
+    background-position: 0px 0px;
+    border: none;
+    background-image: url(../../images/logo.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
