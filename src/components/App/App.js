@@ -67,13 +67,13 @@ function App() {
 
     // Эффект который переключает видимость кнопки ЕЩЁ
   React.useEffect(() => {
-    if (posts.length == totalCount) {
+    if (Number(posts.length) === Number(totalCount)) {
       setMoreStatus(false);
     }
     else {
       setMoreStatus(true);
     }
-  }, [posts.length])
+  }, [posts.length, totalCount])
 
   //Функция для кнопки ЕЩЁ, для добавления дополнительных постов после 5 добавлений от скролла
   const handleMore = () => {
