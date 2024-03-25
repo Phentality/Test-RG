@@ -13,7 +13,7 @@ import NotFound from '../NotFound/NotFound';
 function App() {
   // Стейт который хранит в себе все посты
   const [posts, setPosts] = React.useState([]);
-  // Стейт пагинации
+  // Стейт пагинации, он сразу имеет значение 2, так как подгрузка первой страницы происходит при монтировании
   const [currentPage, setCurrentPage] = React.useState(2);
   // Стейт отвечает за активацию прогрузки постов
   const [fetching, setFecthing] = React.useState(false);
