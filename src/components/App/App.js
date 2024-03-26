@@ -67,7 +67,7 @@ function App() {
 
     // Эффект который переключает видимость кнопки ЕЩЁ
   React.useEffect(() => {
-    if (Number(posts.length) === Number(totalCount)) {
+    if (Number(posts.length) === Number(totalCount) || Number(posts.length) <= 50) {
       setMoreStatus(false);
     }
     else {
