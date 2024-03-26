@@ -24,11 +24,21 @@ function App() {
 
   // Подгрузка и отрисовка первых 10 постов
   React.useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=1`)
-      .then((response) => {
-        setPosts(response.data);
-        setTotalCount(response.headers['x-total-count']); 
-      })
+    if (sessionStorage.getItem('load') <= 0) {
+      axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=1`)
+        .then((response) => {
+          setPosts(response.data);
+          setTotalCount(response.headers['x-total-count']);
+        })
+    }
+    else {
+      axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=${sessionStorage.getItem('load') * 10}`)
+        .then((response) => {
+          setPosts(response.data);
+          setTotalCount(response.headers['x-total-count']);
+          setCurrentPage(Number(sessionStorage.getItem('load')) + 1);
+        })
+    }
   }, [])
 
   // Эффект который отправляет запрос на сервер для подгрузки 10ти постов
@@ -38,6 +48,7 @@ function App() {
         .then((response) => {
           setPosts([...posts, ...response.data]);
           setCurrentPage(prev => prev + 1);
+          sessionStorage.setItem('load', currentPage);
         })
         .catch((err) => {
           console.log(err);
@@ -53,11 +64,11 @@ function App() {
     // Цифра должна быть меньше 100, так как один скролл = 100
     // Выставляет условие, posts.length < 50, чтоб доскролл работал только на первые 5 добавлений
     if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100 && posts.length <= 50) {
-      setFecthing(true);;
+      setFecthing(true);
     }
   }, [posts.length]);
 
-  // Накидываем обработчик на скролл
+  // Накидываем обработчик на скролл 
   React.useEffect(() => {
     document.addEventListener('scroll', scrollHandler)
     return function () {
@@ -65,7 +76,7 @@ function App() {
     };
   }, [scrollHandler])
 
-    // Эффект который переключает видимость кнопки ЕЩЁ
+  // Эффект который переключает видимость кнопки ЕЩЁ
   React.useEffect(() => {
     if (Number(posts.length) === Number(totalCount) || Number(posts.length) <= 50) {
       setMoreStatus(false);
@@ -81,6 +92,7 @@ function App() {
       .then((response) => {
         setPosts([...posts, ...response.data]);
         setCurrentPage(prev => prev + 1);
+        sessionStorage.setItem('load', currentPage);
       })
       .catch((err) => {
         console.log(err);
@@ -91,7 +103,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Main posts={posts} moreStatus={moreStatus} handleMore={handleMore} />} />
-        <Route path="/posts/:id" element={<PostPage />}/>
+        <Route path="/posts/:id" element={<PostPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div >
