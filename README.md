@@ -17,3 +17,7 @@
 
 Создаёт приложение для production'а в папке "build".\
 Оно объединяет приложение React в production и оптимизирует сборку для лучшей производительности.
+
+### Демо выложена на GH-pages
+
+[https://phentality.github.io/Test-RG](https://phentality.github.io/Test-RG)
