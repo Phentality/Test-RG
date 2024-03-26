@@ -1,7 +1,7 @@
 import Header from '../Header/Header';
 import PostsList from '../PostsList/PostsList'
 
-// Основная часть SPA
+// Основная часть SPA, сюда передаётся стейт для отображения кнопки ЕЩЁ
 function Main(props) {
   return (
     <main>   

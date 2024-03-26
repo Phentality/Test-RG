@@ -22,7 +22,7 @@ function App() {
   // Стейт для показания кнопки ЕЩЁ
   const [moreStatus, setMoreStatus] = React.useState(false);
 
-  // Подгрузка и отрисовка первых 10 постов
+  // Подгрузка и отрисовка первых 10 постов, или же если есть параметры пагинации, то подругзка нужного количества постов
   React.useEffect(() => {
     if (sessionStorage.getItem('load') <= 0) {
       axios.get(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=1`)

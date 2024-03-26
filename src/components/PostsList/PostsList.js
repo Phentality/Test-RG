@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function PostList(props) {
 
-  // Секция с постами
+  // Секция с постами, сюда приходит массив с карточками и с помощью метода map отрисовываются
   return (
     <section className='postlist'>
       {props.posts.map((post) => <Link style={{ textDecoration: 'none' }} key={post.id} to={`/posts/${post.id}`}>

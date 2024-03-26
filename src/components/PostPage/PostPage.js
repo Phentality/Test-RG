@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+// Страница для отображения информации о карточке
 function PostPage() {
   const { id } = useParams();
   const [post, setPost] = React.useState(null);
